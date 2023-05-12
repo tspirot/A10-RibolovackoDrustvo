@@ -39,7 +39,6 @@ namespace A10Blok
                 {
                     MessageBox.Show(ex.Message);
                 }
-            
         }
 
         private void Analiza_Load(object sender, EventArgs e)

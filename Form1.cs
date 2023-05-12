@@ -148,17 +148,19 @@ namespace A10Blok
             {
                 MessageBox.Show("Morate izabrati red koji zelite da izmenite!");
             }
- 
         }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            tbSifra.Text = dt.Rows[listBox1.SelectedIndex]["PecarosID"].ToString();
-            tbIme.Text = dt.Rows[listBox1.SelectedIndex]["Ime"].ToString();
-            tbPrezime.Text = dt.Rows[listBox1.SelectedIndex]["Prezime"].ToString();
-            tbAdresa.Text = dt.Rows[listBox1.SelectedIndex]["Adresa"].ToString();
-            cbGrad.Text = dt.Rows[listBox1.SelectedIndex]["Grad"].ToString();
-            tbTelefon.Text = dt.Rows[listBox1.SelectedIndex]["Telefon"].ToString();
+            if (listBox1.SelectedItems.Count > 0)
+            {
+                tbSifra.Text = dt.Rows[listBox1.SelectedIndex]["PecarosID"].ToString();
+                tbIme.Text = dt.Rows[listBox1.SelectedIndex]["Ime"].ToString();
+                tbPrezime.Text = dt.Rows[listBox1.SelectedIndex]["Prezime"].ToString();
+                tbAdresa.Text = dt.Rows[listBox1.SelectedIndex]["Adresa"].ToString();
+                cbGrad.Text = dt.Rows[listBox1.SelectedIndex]["Grad"].ToString();
+                tbTelefon.Text = dt.Rows[listBox1.SelectedIndex]["Telefon"].ToString();
+            }
         }
 
         private void tstripAnaliza_Click(object sender, EventArgs e)
