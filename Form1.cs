@@ -25,7 +25,9 @@ namespace A10Blok
             try
             {
                 konekcija.Open();
-                string sqlUpit = "SELECT PecarosID, Ime, Prezime, Adresa, Grad, Telefon FROM Pecaros, Grad WHERE Pecaros.GradID = Grad.GradID";
+                string sqlUpit = "SELECT PecarosID, Ime, Prezime, Adresa, Grad, Telefon " +
+                    "FROM Pecaros, Grad " +
+                    "WHERE Pecaros.GradID = Grad.GradID";
                 SqlCommand komanda = new SqlCommand(sqlUpit, konekcija);
                 SqlDataAdapter da = new SqlDataAdapter(komanda);
                 dt.Clear();
@@ -34,14 +36,14 @@ namespace A10Blok
                 listBox1.Items.Clear();
                 foreach (DataRow row in dt.Rows)
                 {
-                    listBox1.Items.Add(String.Format("{0,-7} {1,-15} {2,-15} {3, -25} {4, -15} {5, -10}", row["PecarosID"], row["Ime"], row["Prezime"], row["Adresa"], row["Grad"], row["Telefon"]));
+                    listBox1.Items.Add(String.Format("{0,-7} {1,-15} {2,-15} {3, -25} {4, -15} {5, -10}", 
+                        row["PecarosID"], row["Ime"], row["Prezime"], row["Adresa"], row["Grad"], row["Telefon"]));
                 }
             }
             catch(Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-            
         }
 
         private void tbPodaci()
@@ -49,7 +51,10 @@ namespace A10Blok
             try
             {
                 konekcija.Open();
-                string sqlUpit = "SELECT PecarosID, Ime, Prezime, Adresa, Grad, Telefon FROM Pecaros, Grad WHERE Pecaros.GradID = Grad.GradID ORDER BY PecarosID ASC";
+                string sqlUpit = "SELECT PecarosID, Ime, Prezime, Adresa, Grad, Telefon " +
+                    "FROM Pecaros, Grad " +
+                    "WHERE Pecaros.GradID = Grad.GradID " +
+                    "ORDER BY PecarosID ASC";
                 SqlCommand komanda = new SqlCommand(sqlUpit, konekcija);
                 SqlDataAdapter da = new SqlDataAdapter(komanda);
                 DataTable dt2 = new DataTable();
@@ -66,7 +71,6 @@ namespace A10Blok
             {
                 MessageBox.Show(ex.Message);
             }
-
         }
 
         private void cbPodaci()
@@ -109,7 +113,6 @@ namespace A10Blok
 
         private void tstripIzmeni_Click(object sender, EventArgs e)
         {
-
             if(tbIme.Text == "" || tbPrezime.Text == "" || tbAdresa.Text == "" || tbTelefon.Text == "")
             {
                 MessageBox.Show("Morate uneti sve podatke!");
@@ -117,13 +120,12 @@ namespace A10Blok
             }
             if (tbSifra.Text != "")
             {
-
-
-
                 try
                 {
                     konekcija.Open();
-                    string sqlIzmena = "UPDATE Pecaros SET Ime = @Ime, Prezime = @Prezime, Adresa = @Adresa, GradID = @Grad, Telefon = @Telefon WHERE PecarosID = @PecarosID";
+                    string sqlIzmena = "UPDATE Pecaros " +
+                        "SET Ime = @Ime, Prezime = @Prezime, Adresa = @Adresa, GradID = @Grad, Telefon = @Telefon " +
+                        "WHERE PecarosID = @PecarosID";
                     SqlCommand komandaIzmena = new SqlCommand(sqlIzmena, konekcija);
                     komandaIzmena.Parameters.AddWithValue("@PecarosID", Convert.ToInt32(tbSifra.Text));
                     komandaIzmena.Parameters.AddWithValue("@Ime", tbIme.Text);

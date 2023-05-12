@@ -22,7 +22,6 @@ namespace A10Blok
 
         private void ComboBoxPodaci()
         {
-
                 try
                 {
                     konekcija.Open();
@@ -46,6 +45,7 @@ namespace A10Blok
         private void Analiza_Load(object sender, EventArgs e)
         {
             ComboBoxPodaci();
+            comboBox1.Text = "Izaberi pecarosa"; // Иницијална вредност у контроли ComboBox је „Izaberi pecaroša“.
         }
 
         private void btnIzadji_Click(object sender, EventArgs e)
@@ -58,7 +58,13 @@ namespace A10Blok
             try
             {
                 konekcija.Open();
-                string sqlUpit = "SELECT Naziv AS Vrsta, COUNT(Ulov.VrstaID) AS Broj FROM Vrsta_Ribe, Ulov, Pecaros WHERE Ulov.PecarosID = Pecaros.PecarosID AND Pecaros.PecarosID = @param3 AND Ulov.VrstaID = Vrsta_Ribe.VrstaID AND Datum BETWEEN @param1 AND @param2 GROUP BY Naziv";
+                string sqlUpit = "SELECT Naziv AS Vrsta, COUNT(Ulov.VrstaID) AS Broj " +
+                    "FROM Vrsta_Ribe, Ulov, Pecaros " +
+                    "WHERE Ulov.PecarosID = Pecaros.PecarosID " +
+                    "AND Pecaros.PecarosID = @param3 " +
+                    "AND Ulov.VrstaID = Vrsta_Ribe.VrstaID " +
+                    "AND Datum BETWEEN @param1 AND @param2 " +
+                    "GROUP BY Naziv";
                 SqlCommand komanda = new SqlCommand(sqlUpit, konekcija);
                 komanda.Parameters.AddWithValue("@param1", dtpOd.Value);
                 komanda.Parameters.AddWithValue("@param2", dtpDo.Value);
