@@ -36,11 +36,11 @@ namespace A10Blok
                 listBox1.Items.Clear();
                 foreach (DataRow row in dt.Rows)
                 {
-                    listBox1.Items.Add(String.Format("{0,-7} {1,-15} {2,-15} {3, -25} {4, -15} {5, -10}", 
+                    listBox1.Items.Add(String.Format("{0,-7} {1,-15} {2,-15} {3, -25} {4, -15} {5, -10}",
                         row["PecarosID"], row["Ime"], row["Prezime"], row["Adresa"], row["Grad"], row["Telefon"]));
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
@@ -79,7 +79,9 @@ namespace A10Blok
             {
                 DataTable dt2 = new DataTable();
                 konekcija.Open();
-                string sqlUpit2 = "SELECT DISTINCT GradID, Grad FROM Grad ORDER BY Grad ASC";
+                string sqlUpit2 = "SELECT DISTINCT GradID, Grad " +
+                    "FROM Grad " +
+                    "ORDER BY Grad ASC";
                 SqlCommand komanda2 = new SqlCommand(sqlUpit2, konekcija);
                 SqlDataAdapter da2 = new SqlDataAdapter(komanda2);
                 da2.Fill(dt2);
@@ -94,16 +96,6 @@ namespace A10Blok
             }
         }
 
-        private void ObrisiPodatke()
-        {
-            tbSifra.Text = "";
-            tbIme.Text = "";
-            tbPrezime.Text = "";
-            tbAdresa.Text = "";
-            cbGrad.SelectedText = "";
-            tbTelefon.Text = "";
-        }
-
         private void Form1_Load(object sender, EventArgs e)
         {
             UcitajListBox();
@@ -113,43 +105,41 @@ namespace A10Blok
 
         private void tstripIzmeni_Click(object sender, EventArgs e)
         {
-            if(tbIme.Text == "" || tbPrezime.Text == "" || tbAdresa.Text == "" || tbTelefon.Text == "")
+            if (tbIme.Text == "" || tbPrezime.Text == "" || tbAdresa.Text == "" || tbTelefon.Text == "")
             {
                 MessageBox.Show("Morate uneti sve podatke!");
                 return;
             }
-            if (tbSifra.Text != "")
-            {
-                try
-                {
-                    konekcija.Open();
-                    string sqlIzmena = "UPDATE Pecaros " +
-                        "SET Ime = @Ime, Prezime = @Prezime, Adresa = @Adresa, GradID = @Grad, Telefon = @Telefon " +
-                        "WHERE PecarosID = @PecarosID";
-                    SqlCommand komandaIzmena = new SqlCommand(sqlIzmena, konekcija);
-                    komandaIzmena.Parameters.AddWithValue("@PecarosID", Convert.ToInt32(tbSifra.Text));
-                    komandaIzmena.Parameters.AddWithValue("@Ime", tbIme.Text);
-                    komandaIzmena.Parameters.AddWithValue("@Prezime", tbPrezime.Text);
-                    komandaIzmena.Parameters.AddWithValue("@Adresa", tbAdresa.Text);
-                    komandaIzmena.Parameters.AddWithValue("@Grad", cbGrad.SelectedValue);
-                    komandaIzmena.Parameters.AddWithValue("@Telefon", tbTelefon.Text);
-                    komandaIzmena.ExecuteNonQuery();
-                    konekcija.Close();
-                    UcitajListBox();
-                    ObrisiPodatke();
-                    MessageBox.Show("Podaci su uspesno izmenjeni!");
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-            }
-            else
+            if (tbSifra.Text == "")
             {
                 MessageBox.Show("Morate izabrati red koji zelite da izmenite!");
+                return;
+            }
+            try
+            {
+                konekcija.Open();
+                string sqlIzmena = "UPDATE Pecaros " +
+                    "SET Ime = @Ime, Prezime = @Prezime, Adresa = @Adresa, GradID = @Grad, Telefon = @Telefon " +
+                    "WHERE PecarosID = @PecarosID";
+                SqlCommand komandaIzmena = new SqlCommand(sqlIzmena, konekcija);
+                komandaIzmena.Parameters.AddWithValue("@PecarosID", Convert.ToInt32(tbSifra.Text));
+                komandaIzmena.Parameters.AddWithValue("@Ime", tbIme.Text);
+                komandaIzmena.Parameters.AddWithValue("@Prezime", tbPrezime.Text);
+                komandaIzmena.Parameters.AddWithValue("@Adresa", tbAdresa.Text);
+                komandaIzmena.Parameters.AddWithValue("@Grad", cbGrad.SelectedValue);
+                komandaIzmena.Parameters.AddWithValue("@Telefon", tbTelefon.Text);
+                komandaIzmena.ExecuteNonQuery();
+                konekcija.Close();
+                int sel = listBox1.SelectedIndex;
+                UcitajListBox();
+                listBox1.SelectedIndex = sel;
+                MessageBox.Show("Podaci su uspesno izmenjeni!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
-
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (listBox1.SelectedItems.Count > 0)
