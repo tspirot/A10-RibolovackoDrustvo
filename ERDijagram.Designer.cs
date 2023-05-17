@@ -36,6 +36,8 @@ namespace A10Blok {
         
         private UlovDataTable tableUlov;
         
+        private UlovOpremaDataTable tableUlovOprema;
+        
         private Vrsta_RibeDataTable tableVrsta_Ribe;
         
         private global::System.Data.DataRelation relationFK_Lokacija_ToJezero;
@@ -44,11 +46,13 @@ namespace A10Blok {
         
         private global::System.Data.DataRelation relationFK_Ulov_ToJezero;
         
-        private global::System.Data.DataRelation relationFK_Ulov_ToOprema;
-        
         private global::System.Data.DataRelation relationFK_Ulov_ToPecaros;
         
         private global::System.Data.DataRelation relationFK_Ulov_ToVrsta_Ribe;
+        
+        private global::System.Data.DataRelation relationFK_UlovOprema_ToOprema;
+        
+        private global::System.Data.DataRelation relationFK_UlovOprema_ToUlov;
         
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
@@ -95,6 +99,9 @@ namespace A10Blok {
                 }
                 if ((ds.Tables["Ulov"] != null)) {
                     base.Tables.Add(new UlovDataTable(ds.Tables["Ulov"]));
+                }
+                if ((ds.Tables["UlovOprema"] != null)) {
+                    base.Tables.Add(new UlovOpremaDataTable(ds.Tables["UlovOprema"]));
                 }
                 if ((ds.Tables["Vrsta_Ribe"] != null)) {
                     base.Tables.Add(new Vrsta_RibeDataTable(ds.Tables["Vrsta_Ribe"]));
@@ -174,6 +181,16 @@ namespace A10Blok {
         public UlovDataTable Ulov {
             get {
                 return this.tableUlov;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public UlovOpremaDataTable UlovOprema {
+            get {
+                return this.tableUlovOprema;
             }
         }
         
@@ -272,6 +289,9 @@ namespace A10Blok {
                 if ((ds.Tables["Ulov"] != null)) {
                     base.Tables.Add(new UlovDataTable(ds.Tables["Ulov"]));
                 }
+                if ((ds.Tables["UlovOprema"] != null)) {
+                    base.Tables.Add(new UlovOpremaDataTable(ds.Tables["UlovOprema"]));
+                }
                 if ((ds.Tables["Vrsta_Ribe"] != null)) {
                     base.Tables.Add(new Vrsta_RibeDataTable(ds.Tables["Vrsta_Ribe"]));
                 }
@@ -344,6 +364,12 @@ namespace A10Blok {
                     this.tableUlov.InitVars();
                 }
             }
+            this.tableUlovOprema = ((UlovOpremaDataTable)(base.Tables["UlovOprema"]));
+            if ((initTable == true)) {
+                if ((this.tableUlovOprema != null)) {
+                    this.tableUlovOprema.InitVars();
+                }
+            }
             this.tableVrsta_Ribe = ((Vrsta_RibeDataTable)(base.Tables["Vrsta_Ribe"]));
             if ((initTable == true)) {
                 if ((this.tableVrsta_Ribe != null)) {
@@ -353,9 +379,10 @@ namespace A10Blok {
             this.relationFK_Lokacija_ToJezero = this.Relations["FK_Lokacija_ToJezero"];
             this.relationFK_Pecaros_ToGrad = this.Relations["FK_Pecaros_ToGrad"];
             this.relationFK_Ulov_ToJezero = this.Relations["FK_Ulov_ToJezero"];
-            this.relationFK_Ulov_ToOprema = this.Relations["FK_Ulov_ToOprema"];
             this.relationFK_Ulov_ToPecaros = this.Relations["FK_Ulov_ToPecaros"];
             this.relationFK_Ulov_ToVrsta_Ribe = this.Relations["FK_Ulov_ToVrsta_Ribe"];
+            this.relationFK_UlovOprema_ToOprema = this.Relations["FK_UlovOprema_ToOprema"];
+            this.relationFK_UlovOprema_ToUlov = this.Relations["FK_UlovOprema_ToUlov"];
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -378,6 +405,8 @@ namespace A10Blok {
             base.Tables.Add(this.tablePecaros);
             this.tableUlov = new UlovDataTable();
             base.Tables.Add(this.tableUlov);
+            this.tableUlovOprema = new UlovOpremaDataTable();
+            base.Tables.Add(this.tableUlovOprema);
             this.tableVrsta_Ribe = new Vrsta_RibeDataTable();
             base.Tables.Add(this.tableVrsta_Ribe);
             this.relationFK_Lokacija_ToJezero = new global::System.Data.DataRelation("FK_Lokacija_ToJezero", new global::System.Data.DataColumn[] {
@@ -392,10 +421,6 @@ namespace A10Blok {
                         this.tableJezero.JezeroIDColumn}, new global::System.Data.DataColumn[] {
                         this.tableUlov.JezeroIDColumn}, false);
             this.Relations.Add(this.relationFK_Ulov_ToJezero);
-            this.relationFK_Ulov_ToOprema = new global::System.Data.DataRelation("FK_Ulov_ToOprema", new global::System.Data.DataColumn[] {
-                        this.tableOprema.OpremaIDColumn}, new global::System.Data.DataColumn[] {
-                        this.tableUlov.OpremaIDColumn}, false);
-            this.Relations.Add(this.relationFK_Ulov_ToOprema);
             this.relationFK_Ulov_ToPecaros = new global::System.Data.DataRelation("FK_Ulov_ToPecaros", new global::System.Data.DataColumn[] {
                         this.tablePecaros.PecarosIDColumn}, new global::System.Data.DataColumn[] {
                         this.tableUlov.PecarosIDColumn}, false);
@@ -404,6 +429,16 @@ namespace A10Blok {
                         this.tableVrsta_Ribe.VrstaIDColumn}, new global::System.Data.DataColumn[] {
                         this.tableUlov.VrstaIDColumn}, false);
             this.Relations.Add(this.relationFK_Ulov_ToVrsta_Ribe);
+            this.relationFK_UlovOprema_ToOprema = new global::System.Data.DataRelation("FK_UlovOprema_ToOprema", new global::System.Data.DataColumn[] {
+                        this.tableOprema.OpremaIDColumn}, new global::System.Data.DataColumn[] {
+                        this.tableUlovOprema.OpremaIDColumn}, false);
+            this.Relations.Add(this.relationFK_UlovOprema_ToOprema);
+            this.relationFK_UlovOprema_ToUlov = new global::System.Data.DataRelation("FK_UlovOprema_ToUlov", new global::System.Data.DataColumn[] {
+                        this.tableUlov.RbrUlovaColumn,
+                        this.tableUlov.PecarosIDColumn}, new global::System.Data.DataColumn[] {
+                        this.tableUlovOprema.RbrUlovaColumn,
+                        this.tableUlovOprema.PecarosIdColumn}, false);
+            this.Relations.Add(this.relationFK_UlovOprema_ToUlov);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -439,6 +474,12 @@ namespace A10Blok {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private bool ShouldSerializeUlov() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        private bool ShouldSerializeUlovOprema() {
             return false;
         }
         
@@ -520,6 +561,9 @@ namespace A10Blok {
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         public delegate void UlovRowChangeEventHandler(object sender, UlovRowChangeEvent e);
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        public delegate void UlovOpremaRowChangeEventHandler(object sender, UlovOpremaRowChangeEvent e);
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         public delegate void Vrsta_RibeRowChangeEventHandler(object sender, Vrsta_RibeRowChangeEvent e);
@@ -1464,15 +1508,7 @@ namespace A10Blok {
             
             private global::System.Data.DataColumn columnOpremaID;
             
-            private global::System.Data.DataColumn columnStap;
-            
-            private global::System.Data.DataColumn columnMasinica;
-            
-            private global::System.Data.DataColumn columnNajlon;
-            
-            private global::System.Data.DataColumn columnMamac;
-            
-            private global::System.Data.DataColumn columnUdica;
+            private global::System.Data.DataColumn columnNaziv;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
@@ -1517,41 +1553,9 @@ namespace A10Blok {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public global::System.Data.DataColumn StapColumn {
+            public global::System.Data.DataColumn NazivColumn {
                 get {
-                    return this.columnStap;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public global::System.Data.DataColumn MasinicaColumn {
-                get {
-                    return this.columnMasinica;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public global::System.Data.DataColumn NajlonColumn {
-                get {
-                    return this.columnNajlon;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public global::System.Data.DataColumn MamacColumn {
-                get {
-                    return this.columnMamac;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public global::System.Data.DataColumn UdicaColumn {
-                get {
-                    return this.columnUdica;
+                    return this.columnNaziv;
                 }
             }
             
@@ -1592,15 +1596,11 @@ namespace A10Blok {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public OpremaRow AddOpremaRow(int OpremaID, string Stap, string Masinica, string Najlon, byte[] Mamac, byte[] Udica) {
+            public OpremaRow AddOpremaRow(int OpremaID, string Naziv) {
                 OpremaRow rowOpremaRow = ((OpremaRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         OpremaID,
-                        Stap,
-                        Masinica,
-                        Najlon,
-                        Mamac,
-                        Udica};
+                        Naziv};
                 rowOpremaRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowOpremaRow);
                 return rowOpremaRow;
@@ -1631,11 +1631,7 @@ namespace A10Blok {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             internal void InitVars() {
                 this.columnOpremaID = base.Columns["OpremaID"];
-                this.columnStap = base.Columns["Stap"];
-                this.columnMasinica = base.Columns["Masinica"];
-                this.columnNajlon = base.Columns["Najlon"];
-                this.columnMamac = base.Columns["Mamac"];
-                this.columnUdica = base.Columns["Udica"];
+                this.columnNaziv = base.Columns["Naziv"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1643,28 +1639,14 @@ namespace A10Blok {
             private void InitClass() {
                 this.columnOpremaID = new global::System.Data.DataColumn("OpremaID", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnOpremaID);
-                this.columnStap = new global::System.Data.DataColumn("Stap", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnStap);
-                this.columnMasinica = new global::System.Data.DataColumn("Masinica", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnMasinica);
-                this.columnNajlon = new global::System.Data.DataColumn("Najlon", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnNajlon);
-                this.columnMamac = new global::System.Data.DataColumn("Mamac", typeof(byte[]), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnMamac);
-                this.columnUdica = new global::System.Data.DataColumn("Udica", typeof(byte[]), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnUdica);
+                this.columnNaziv = new global::System.Data.DataColumn("Naziv", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnNaziv);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnOpremaID}, true));
                 this.columnOpremaID.AllowDBNull = false;
                 this.columnOpremaID.Unique = true;
-                this.columnStap.AllowDBNull = false;
-                this.columnStap.MaxLength = 50;
-                this.columnMasinica.AllowDBNull = false;
-                this.columnMasinica.MaxLength = 50;
-                this.columnNajlon.AllowDBNull = false;
-                this.columnNajlon.MaxLength = 50;
-                this.columnMamac.AllowDBNull = false;
-                this.columnUdica.AllowDBNull = false;
+                this.columnNaziv.AllowDBNull = false;
+                this.columnNaziv.MaxLength = 50;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2158,8 +2140,6 @@ namespace A10Blok {
             
             private global::System.Data.DataColumn columnRbrLokacije;
             
-            private global::System.Data.DataColumn columnOpremaID;
-            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public UlovDataTable() {
@@ -2259,14 +2239,6 @@ namespace A10Blok {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public global::System.Data.DataColumn OpremaIDColumn {
-                get {
-                    return this.columnOpremaID;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -2302,7 +2274,7 @@ namespace A10Blok {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public UlovRow AddUlovRow(PecarosRow parentPecarosRowByFK_Ulov_ToPecaros, System.DateTime Datum, System.TimeSpan Vreme, Vrsta_RibeRow parentVrsta_RibeRowByFK_Ulov_ToVrsta_Ribe, double Tezina, JezeroRow parentJezeroRowByFK_Ulov_ToJezero, int RbrLokacije, OpremaRow parentOpremaRowByFK_Ulov_ToOprema) {
+            public UlovRow AddUlovRow(PecarosRow parentPecarosRowByFK_Ulov_ToPecaros, System.DateTime Datum, System.TimeSpan Vreme, Vrsta_RibeRow parentVrsta_RibeRowByFK_Ulov_ToVrsta_Ribe, double Tezina, JezeroRow parentJezeroRowByFK_Ulov_ToJezero, int RbrLokacije) {
                 UlovRow rowUlovRow = ((UlovRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -2312,8 +2284,7 @@ namespace A10Blok {
                         null,
                         Tezina,
                         null,
-                        RbrLokacije,
-                        null};
+                        RbrLokacije};
                 if ((parentPecarosRowByFK_Ulov_ToPecaros != null)) {
                     columnValuesArray[0] = parentPecarosRowByFK_Ulov_ToPecaros[0];
                 }
@@ -2322,9 +2293,6 @@ namespace A10Blok {
                 }
                 if ((parentJezeroRowByFK_Ulov_ToJezero != null)) {
                     columnValuesArray[6] = parentJezeroRowByFK_Ulov_ToJezero[0];
-                }
-                if ((parentOpremaRowByFK_Ulov_ToOprema != null)) {
-                    columnValuesArray[8] = parentOpremaRowByFK_Ulov_ToOprema[0];
                 }
                 rowUlovRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowUlovRow);
@@ -2364,7 +2332,6 @@ namespace A10Blok {
                 this.columnTezina = base.Columns["Tezina"];
                 this.columnJezeroID = base.Columns["JezeroID"];
                 this.columnRbrLokacije = base.Columns["RbrLokacije"];
-                this.columnOpremaID = base.Columns["OpremaID"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2386,8 +2353,6 @@ namespace A10Blok {
                 base.Columns.Add(this.columnJezeroID);
                 this.columnRbrLokacije = new global::System.Data.DataColumn("RbrLokacije", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnRbrLokacije);
-                this.columnOpremaID = new global::System.Data.DataColumn("OpremaID", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnOpremaID);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnPecarosID,
                                 this.columnRbrUlova}, true));
@@ -2489,6 +2454,300 @@ namespace A10Blok {
                 global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
                 attribute2.Name = "tableTypeName";
                 attribute2.FixedValue = "UlovDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class UlovOpremaDataTable : global::System.Data.TypedTableBase<UlovOpremaRow> {
+            
+            private global::System.Data.DataColumn columnPecarosId;
+            
+            private global::System.Data.DataColumn columnRbrUlova;
+            
+            private global::System.Data.DataColumn columnOpremaID;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public UlovOpremaDataTable() {
+                this.TableName = "UlovOprema";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            internal UlovOpremaDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected UlovOpremaDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn PecarosIdColumn {
+                get {
+                    return this.columnPecarosId;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn RbrUlovaColumn {
+                get {
+                    return this.columnRbrUlova;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn OpremaIDColumn {
+                get {
+                    return this.columnOpremaID;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public UlovOpremaRow this[int index] {
+                get {
+                    return ((UlovOpremaRow)(this.Rows[index]));
+                }
+            }
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event UlovOpremaRowChangeEventHandler UlovOpremaRowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event UlovOpremaRowChangeEventHandler UlovOpremaRowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event UlovOpremaRowChangeEventHandler UlovOpremaRowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event UlovOpremaRowChangeEventHandler UlovOpremaRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void AddUlovOpremaRow(UlovOpremaRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public UlovOpremaRow AddUlovOpremaRow(int PecarosId, int RbrUlova, OpremaRow parentOpremaRowByFK_UlovOprema_ToOprema) {
+                UlovOpremaRow rowUlovOpremaRow = ((UlovOpremaRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        PecarosId,
+                        RbrUlova,
+                        null};
+                if ((parentOpremaRowByFK_UlovOprema_ToOprema != null)) {
+                    columnValuesArray[2] = parentOpremaRowByFK_UlovOprema_ToOprema[0];
+                }
+                rowUlovOpremaRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowUlovOpremaRow);
+                return rowUlovOpremaRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public UlovOpremaRow FindByPecarosIdRbrUlovaOpremaID(int PecarosId, int RbrUlova, int OpremaID) {
+                return ((UlovOpremaRow)(this.Rows.Find(new object[] {
+                            PecarosId,
+                            RbrUlova,
+                            OpremaID})));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public override global::System.Data.DataTable Clone() {
+                UlovOpremaDataTable cln = ((UlovOpremaDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new UlovOpremaDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            internal void InitVars() {
+                this.columnPecarosId = base.Columns["PecarosId"];
+                this.columnRbrUlova = base.Columns["RbrUlova"];
+                this.columnOpremaID = base.Columns["OpremaID"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            private void InitClass() {
+                this.columnPecarosId = new global::System.Data.DataColumn("PecarosId", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPecarosId);
+                this.columnRbrUlova = new global::System.Data.DataColumn("RbrUlova", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnRbrUlova);
+                this.columnOpremaID = new global::System.Data.DataColumn("OpremaID", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnOpremaID);
+                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
+                                this.columnPecarosId,
+                                this.columnRbrUlova,
+                                this.columnOpremaID}, true));
+                this.columnPecarosId.AllowDBNull = false;
+                this.columnRbrUlova.AllowDBNull = false;
+                this.columnOpremaID.AllowDBNull = false;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public UlovOpremaRow NewUlovOpremaRow() {
+                return ((UlovOpremaRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new UlovOpremaRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override global::System.Type GetRowType() {
+                return typeof(UlovOpremaRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.UlovOpremaRowChanged != null)) {
+                    this.UlovOpremaRowChanged(this, new UlovOpremaRowChangeEvent(((UlovOpremaRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.UlovOpremaRowChanging != null)) {
+                    this.UlovOpremaRowChanging(this, new UlovOpremaRowChangeEvent(((UlovOpremaRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.UlovOpremaRowDeleted != null)) {
+                    this.UlovOpremaRowDeleted(this, new UlovOpremaRowChangeEvent(((UlovOpremaRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.UlovOpremaRowDeleting != null)) {
+                    this.UlovOpremaRowDeleting(this, new UlovOpremaRowChangeEvent(((UlovOpremaRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void RemoveUlovOpremaRow(UlovOpremaRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                ERDijagram ds = new ERDijagram();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "UlovOpremaDataTable";
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
@@ -3070,67 +3329,23 @@ namespace A10Blok {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public string Stap {
+            public string Naziv {
                 get {
-                    return ((string)(this[this.tableOprema.StapColumn]));
+                    return ((string)(this[this.tableOprema.NazivColumn]));
                 }
                 set {
-                    this[this.tableOprema.StapColumn] = value;
+                    this[this.tableOprema.NazivColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public string Masinica {
-                get {
-                    return ((string)(this[this.tableOprema.MasinicaColumn]));
-                }
-                set {
-                    this[this.tableOprema.MasinicaColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public string Najlon {
-                get {
-                    return ((string)(this[this.tableOprema.NajlonColumn]));
-                }
-                set {
-                    this[this.tableOprema.NajlonColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public byte[] Mamac {
-                get {
-                    return ((byte[])(this[this.tableOprema.MamacColumn]));
-                }
-                set {
-                    this[this.tableOprema.MamacColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public byte[] Udica {
-                get {
-                    return ((byte[])(this[this.tableOprema.UdicaColumn]));
-                }
-                set {
-                    this[this.tableOprema.UdicaColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public UlovRow[] GetUlovRows() {
-                if ((this.Table.ChildRelations["FK_Ulov_ToOprema"] == null)) {
-                    return new UlovRow[0];
+            public UlovOpremaRow[] GetUlovOpremaRows() {
+                if ((this.Table.ChildRelations["FK_UlovOprema_ToOprema"] == null)) {
+                    return new UlovOpremaRow[0];
                 }
                 else {
-                    return ((UlovRow[])(base.GetChildRows(this.Table.ChildRelations["FK_Ulov_ToOprema"])));
+                    return ((UlovOpremaRow[])(base.GetChildRows(this.Table.ChildRelations["FK_UlovOprema_ToOprema"])));
                 }
             }
         }
@@ -3342,39 +3557,12 @@ namespace A10Blok {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public int OpremaID {
-                get {
-                    try {
-                        return ((int)(this[this.tableUlov.OpremaIDColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'OpremaID\' in table \'Ulov\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableUlov.OpremaIDColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public JezeroRow JezeroRow {
                 get {
                     return ((JezeroRow)(this.GetParentRow(this.Table.ParentRelations["FK_Ulov_ToJezero"])));
                 }
                 set {
                     this.SetParentRow(value, this.Table.ParentRelations["FK_Ulov_ToJezero"]);
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public OpremaRow OpremaRow {
-                get {
-                    return ((OpremaRow)(this.GetParentRow(this.Table.ParentRelations["FK_Ulov_ToOprema"])));
-                }
-                set {
-                    this.SetParentRow(value, this.Table.ParentRelations["FK_Ulov_ToOprema"]);
                 }
             }
             
@@ -3402,14 +3590,83 @@ namespace A10Blok {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public bool IsOpremaIDNull() {
-                return this.IsNull(this.tableUlov.OpremaIDColumn);
+            public UlovOpremaRow[] GetUlovOpremaRows() {
+                if ((this.Table.ChildRelations["FK_UlovOprema_ToUlov"] == null)) {
+                    return new UlovOpremaRow[0];
+                }
+                else {
+                    return ((UlovOpremaRow[])(base.GetChildRows(this.Table.ChildRelations["FK_UlovOprema_ToUlov"])));
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        public partial class UlovOpremaRow : global::System.Data.DataRow {
+            
+            private UlovOpremaDataTable tableUlovOprema;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            internal UlovOpremaRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableUlovOprema = ((UlovOpremaDataTable)(this.Table));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public void SetOpremaIDNull() {
-                this[this.tableUlov.OpremaIDColumn] = global::System.Convert.DBNull;
+            public int PecarosId {
+                get {
+                    return ((int)(this[this.tableUlovOprema.PecarosIdColumn]));
+                }
+                set {
+                    this[this.tableUlovOprema.PecarosIdColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public int RbrUlova {
+                get {
+                    return ((int)(this[this.tableUlovOprema.RbrUlovaColumn]));
+                }
+                set {
+                    this[this.tableUlovOprema.RbrUlovaColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public int OpremaID {
+                get {
+                    return ((int)(this[this.tableUlovOprema.OpremaIDColumn]));
+                }
+                set {
+                    this[this.tableUlovOprema.OpremaIDColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public OpremaRow OpremaRow {
+                get {
+                    return ((OpremaRow)(this.GetParentRow(this.Table.ParentRelations["FK_UlovOprema_ToOprema"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["FK_UlovOprema_ToOprema"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public UlovRow UlovRowParent {
+                get {
+                    return ((UlovRow)(this.GetParentRow(this.Table.ParentRelations["FK_UlovOprema_ToUlov"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["FK_UlovOprema_ToUlov"]);
+                }
             }
         }
         
@@ -3679,6 +3936,40 @@ namespace A10Blok {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public UlovRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        public class UlovOpremaRowChangeEvent : global::System.EventArgs {
+            
+            private UlovOpremaRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public UlovOpremaRowChangeEvent(UlovOpremaRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public UlovOpremaRow Row {
                 get {
                     return this.eventRow;
                 }
@@ -4924,54 +5215,32 @@ SELECT JezeroID, RbrLokacije, Naziv, Beleske FROM Lokacija WHERE (JezeroID = @Je
             tableMapping.SourceTable = "Table";
             tableMapping.DataSetTable = "Oprema";
             tableMapping.ColumnMappings.Add("OpremaID", "OpremaID");
-            tableMapping.ColumnMappings.Add("Stap", "Stap");
-            tableMapping.ColumnMappings.Add("Masinica", "Masinica");
-            tableMapping.ColumnMappings.Add("Najlon", "Najlon");
-            tableMapping.ColumnMappings.Add("Mamac", "Mamac");
-            tableMapping.ColumnMappings.Add("Udica", "Udica");
+            tableMapping.ColumnMappings.Add("Naziv", "Naziv");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = "DELETE FROM [dbo].[Oprema] WHERE (([OpremaID] = @Original_OpremaID) AND ([Stap] =" +
-                " @Original_Stap) AND ([Masinica] = @Original_Masinica) AND ([Najlon] = @Original" +
-                "_Najlon) AND ([Mamac] = @Original_Mamac) AND ([Udica] = @Original_Udica))";
+            this._adapter.DeleteCommand.CommandText = "DELETE FROM [dbo].[Oprema] WHERE (([OpremaID] = @Original_OpremaID) AND ([Naziv] " +
+                "= @Original_Naziv))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_OpremaID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "OpremaID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Stap", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Stap", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Masinica", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Masinica", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Najlon", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Najlon", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Mamac", global::System.Data.SqlDbType.VarBinary, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Mamac", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Udica", global::System.Data.SqlDbType.VarBinary, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Udica", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Naziv", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Naziv", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[Oprema] ([OpremaID], [Stap], [Masinica], [Najlon], [Mamac], [U" +
-                "dica]) VALUES (@OpremaID, @Stap, @Masinica, @Najlon, @Mamac, @Udica);\r\nSELECT Op" +
-                "remaID, Stap, Masinica, Najlon, Mamac, Udica FROM Oprema WHERE (OpremaID = @Opre" +
-                "maID)";
+            this._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[Oprema] ([OpremaID], [Naziv]) VALUES (@OpremaID, @Naziv);\r\nSEL" +
+                "ECT OpremaID, Naziv FROM Oprema WHERE (OpremaID = @OpremaID)";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@OpremaID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "OpremaID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Stap", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Stap", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Masinica", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Masinica", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Najlon", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Najlon", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Mamac", global::System.Data.SqlDbType.VarBinary, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Mamac", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Udica", global::System.Data.SqlDbType.VarBinary, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Udica", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Naziv", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Naziv", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[Oprema] SET [OpremaID] = @OpremaID, [Stap] = @Stap, [Masinica] = @Masinica, [Najlon] = @Najlon, [Mamac] = @Mamac, [Udica] = @Udica WHERE (([OpremaID] = @Original_OpremaID) AND ([Stap] = @Original_Stap) AND ([Masinica] = @Original_Masinica) AND ([Najlon] = @Original_Najlon) AND ([Mamac] = @Original_Mamac) AND ([Udica] = @Original_Udica));
-SELECT OpremaID, Stap, Masinica, Najlon, Mamac, Udica FROM Oprema WHERE (OpremaID = @OpremaID)";
+            this._adapter.UpdateCommand.CommandText = "UPDATE [dbo].[Oprema] SET [OpremaID] = @OpremaID, [Naziv] = @Naziv WHERE (([Oprem" +
+                "aID] = @Original_OpremaID) AND ([Naziv] = @Original_Naziv));\r\nSELECT OpremaID, N" +
+                "aziv FROM Oprema WHERE (OpremaID = @OpremaID)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@OpremaID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "OpremaID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Stap", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Stap", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Masinica", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Masinica", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Najlon", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Najlon", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Mamac", global::System.Data.SqlDbType.VarBinary, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Mamac", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Udica", global::System.Data.SqlDbType.VarBinary, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Udica", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Naziv", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Naziv", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_OpremaID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "OpremaID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Stap", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Stap", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Masinica", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Masinica", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Najlon", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Najlon", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Mamac", global::System.Data.SqlDbType.VarBinary, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Mamac", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Udica", global::System.Data.SqlDbType.VarBinary, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Udica", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Naziv", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Naziv", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -4987,7 +5256,7 @@ SELECT OpremaID, Stap, Masinica, Najlon, Mamac, Udica FROM Oprema WHERE (OpremaI
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT OpremaID, Stap, Masinica, Najlon, Mamac, Udica FROM dbo.Oprema";
+            this._commandCollection[0].CommandText = "SELECT OpremaID, Naziv FROM dbo.Oprema";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -5048,37 +5317,13 @@ SELECT OpremaID, Stap, Masinica, Najlon, Mamac, Udica FROM Oprema WHERE (OpremaI
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_OpremaID, string Original_Stap, string Original_Masinica, string Original_Najlon, byte[] Original_Mamac, byte[] Original_Udica) {
+        public virtual int Delete(int Original_OpremaID, string Original_Naziv) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_OpremaID));
-            if ((Original_Stap == null)) {
-                throw new global::System.ArgumentNullException("Original_Stap");
+            if ((Original_Naziv == null)) {
+                throw new global::System.ArgumentNullException("Original_Naziv");
             }
             else {
-                this.Adapter.DeleteCommand.Parameters[1].Value = ((string)(Original_Stap));
-            }
-            if ((Original_Masinica == null)) {
-                throw new global::System.ArgumentNullException("Original_Masinica");
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[2].Value = ((string)(Original_Masinica));
-            }
-            if ((Original_Najlon == null)) {
-                throw new global::System.ArgumentNullException("Original_Najlon");
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[3].Value = ((string)(Original_Najlon));
-            }
-            if ((Original_Mamac == null)) {
-                throw new global::System.ArgumentNullException("Original_Mamac");
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[4].Value = ((byte[])(Original_Mamac));
-            }
-            if ((Original_Udica == null)) {
-                throw new global::System.ArgumentNullException("Original_Udica");
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[5].Value = ((byte[])(Original_Udica));
+                this.Adapter.DeleteCommand.Parameters[1].Value = ((string)(Original_Naziv));
             }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
@@ -5100,37 +5345,13 @@ SELECT OpremaID, Stap, Masinica, Najlon, Mamac, Udica FROM Oprema WHERE (OpremaI
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(int OpremaID, string Stap, string Masinica, string Najlon, byte[] Mamac, byte[] Udica) {
+        public virtual int Insert(int OpremaID, string Naziv) {
             this.Adapter.InsertCommand.Parameters[0].Value = ((int)(OpremaID));
-            if ((Stap == null)) {
-                throw new global::System.ArgumentNullException("Stap");
+            if ((Naziv == null)) {
+                throw new global::System.ArgumentNullException("Naziv");
             }
             else {
-                this.Adapter.InsertCommand.Parameters[1].Value = ((string)(Stap));
-            }
-            if ((Masinica == null)) {
-                throw new global::System.ArgumentNullException("Masinica");
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[2].Value = ((string)(Masinica));
-            }
-            if ((Najlon == null)) {
-                throw new global::System.ArgumentNullException("Najlon");
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[3].Value = ((string)(Najlon));
-            }
-            if ((Mamac == null)) {
-                throw new global::System.ArgumentNullException("Mamac");
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[4].Value = ((byte[])(Mamac));
-            }
-            if ((Udica == null)) {
-                throw new global::System.ArgumentNullException("Udica");
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[5].Value = ((byte[])(Udica));
+                this.Adapter.InsertCommand.Parameters[1].Value = ((string)(Naziv));
             }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
@@ -5152,68 +5373,20 @@ SELECT OpremaID, Stap, Masinica, Najlon, Mamac, Udica FROM Oprema WHERE (OpremaI
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(int OpremaID, string Stap, string Masinica, string Najlon, byte[] Mamac, byte[] Udica, int Original_OpremaID, string Original_Stap, string Original_Masinica, string Original_Najlon, byte[] Original_Mamac, byte[] Original_Udica) {
+        public virtual int Update(int OpremaID, string Naziv, int Original_OpremaID, string Original_Naziv) {
             this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(OpremaID));
-            if ((Stap == null)) {
-                throw new global::System.ArgumentNullException("Stap");
+            if ((Naziv == null)) {
+                throw new global::System.ArgumentNullException("Naziv");
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[1].Value = ((string)(Stap));
+                this.Adapter.UpdateCommand.Parameters[1].Value = ((string)(Naziv));
             }
-            if ((Masinica == null)) {
-                throw new global::System.ArgumentNullException("Masinica");
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[2].Value = ((string)(Masinica));
-            }
-            if ((Najlon == null)) {
-                throw new global::System.ArgumentNullException("Najlon");
+            this.Adapter.UpdateCommand.Parameters[2].Value = ((int)(Original_OpremaID));
+            if ((Original_Naziv == null)) {
+                throw new global::System.ArgumentNullException("Original_Naziv");
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[3].Value = ((string)(Najlon));
-            }
-            if ((Mamac == null)) {
-                throw new global::System.ArgumentNullException("Mamac");
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[4].Value = ((byte[])(Mamac));
-            }
-            if ((Udica == null)) {
-                throw new global::System.ArgumentNullException("Udica");
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[5].Value = ((byte[])(Udica));
-            }
-            this.Adapter.UpdateCommand.Parameters[6].Value = ((int)(Original_OpremaID));
-            if ((Original_Stap == null)) {
-                throw new global::System.ArgumentNullException("Original_Stap");
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[7].Value = ((string)(Original_Stap));
-            }
-            if ((Original_Masinica == null)) {
-                throw new global::System.ArgumentNullException("Original_Masinica");
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[8].Value = ((string)(Original_Masinica));
-            }
-            if ((Original_Najlon == null)) {
-                throw new global::System.ArgumentNullException("Original_Najlon");
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[9].Value = ((string)(Original_Najlon));
-            }
-            if ((Original_Mamac == null)) {
-                throw new global::System.ArgumentNullException("Original_Mamac");
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[10].Value = ((byte[])(Original_Mamac));
-            }
-            if ((Original_Udica == null)) {
-                throw new global::System.ArgumentNullException("Original_Udica");
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[11].Value = ((byte[])(Original_Udica));
+                this.Adapter.UpdateCommand.Parameters[3].Value = ((string)(Original_Naziv));
             }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
@@ -5235,8 +5408,8 @@ SELECT OpremaID, Stap, Masinica, Najlon, Mamac, Udica FROM Oprema WHERE (OpremaI
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string Stap, string Masinica, string Najlon, byte[] Mamac, byte[] Udica, int Original_OpremaID, string Original_Stap, string Original_Masinica, string Original_Najlon, byte[] Original_Mamac, byte[] Original_Udica) {
-            return this.Update(Original_OpremaID, Stap, Masinica, Najlon, Mamac, Udica, Original_OpremaID, Original_Stap, Original_Masinica, Original_Najlon, Original_Mamac, Original_Udica);
+        public virtual int Update(string Naziv, int Original_OpremaID, string Original_Naziv) {
+            return this.Update(Original_OpremaID, Naziv, Original_OpremaID, Original_Naziv);
         }
     }
     
@@ -5784,11 +5957,10 @@ SELECT PecarosID, Ime, Prezime, Adresa, Telefon, GradID FROM Pecaros WHERE (Peca
             tableMapping.ColumnMappings.Add("Tezina", "Tezina");
             tableMapping.ColumnMappings.Add("JezeroID", "JezeroID");
             tableMapping.ColumnMappings.Add("RbrLokacije", "RbrLokacije");
-            tableMapping.ColumnMappings.Add("OpremaID", "OpremaID");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [dbo].[Ulov] WHERE (([PecarosID] = @Original_PecarosID) AND ([RbrUlova] = @Original_RbrUlova) AND ([Datum] = @Original_Datum) AND ([Vreme] = @Original_Vreme) AND ([VrstaID] = @Original_VrstaID) AND ([Tezina] = @Original_Tezina) AND ([JezeroID] = @Original_JezeroID) AND ([RbrLokacije] = @Original_RbrLokacije) AND ((@IsNull_OpremaID = 1 AND [OpremaID] IS NULL) OR ([OpremaID] = @Original_OpremaID)))";
+            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [dbo].[Ulov] WHERE (([PecarosID] = @Original_PecarosID) AND ([RbrUlova] = @Original_RbrUlova) AND ([Datum] = @Original_Datum) AND ([Vreme] = @Original_Vreme) AND ([VrstaID] = @Original_VrstaID) AND ([Tezina] = @Original_Tezina) AND ([JezeroID] = @Original_JezeroID) AND ([RbrLokacije] = @Original_RbrLokacije))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PecarosID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PecarosID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_RbrUlova", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RbrUlova", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
@@ -5798,12 +5970,10 @@ SELECT PecarosID, Ime, Prezime, Adresa, Telefon, GradID FROM Pecaros WHERE (Peca
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Tezina", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Tezina", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_JezeroID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "JezeroID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_RbrLokacije", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RbrLokacije", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_OpremaID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "OpremaID", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_OpremaID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "OpremaID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = @"INSERT INTO [dbo].[Ulov] ([PecarosID], [Datum], [Vreme], [VrstaID], [Tezina], [JezeroID], [RbrLokacije], [OpremaID]) VALUES (@PecarosID, @Datum, @Vreme, @VrstaID, @Tezina, @JezeroID, @RbrLokacije, @OpremaID);
-SELECT PecarosID, RbrUlova, Datum, Vreme, VrstaID, Tezina, JezeroID, RbrLokacije, OpremaID FROM Ulov WHERE (PecarosID = @PecarosID) AND (RbrUlova = SCOPE_IDENTITY())";
+            this._adapter.InsertCommand.CommandText = @"INSERT INTO [dbo].[Ulov] ([PecarosID], [Datum], [Vreme], [VrstaID], [Tezina], [JezeroID], [RbrLokacije]) VALUES (@PecarosID, @Datum, @Vreme, @VrstaID, @Tezina, @JezeroID, @RbrLokacije);
+SELECT PecarosID, RbrUlova, Datum, Vreme, VrstaID, Tezina, JezeroID, RbrLokacije FROM Ulov WHERE (PecarosID = @PecarosID) AND (RbrUlova = SCOPE_IDENTITY())";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PecarosID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PecarosID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Datum", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Datum", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -5812,11 +5982,10 @@ SELECT PecarosID, RbrUlova, Datum, Vreme, VrstaID, Tezina, JezeroID, RbrLokacije
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Tezina", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Tezina", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@JezeroID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "JezeroID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@RbrLokacije", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RbrLokacije", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@OpremaID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "OpremaID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[Ulov] SET [PecarosID] = @PecarosID, [Datum] = @Datum, [Vreme] = @Vreme, [VrstaID] = @VrstaID, [Tezina] = @Tezina, [JezeroID] = @JezeroID, [RbrLokacije] = @RbrLokacije, [OpremaID] = @OpremaID WHERE (([PecarosID] = @Original_PecarosID) AND ([RbrUlova] = @Original_RbrUlova) AND ([Datum] = @Original_Datum) AND ([Vreme] = @Original_Vreme) AND ([VrstaID] = @Original_VrstaID) AND ([Tezina] = @Original_Tezina) AND ([JezeroID] = @Original_JezeroID) AND ([RbrLokacije] = @Original_RbrLokacije) AND ((@IsNull_OpremaID = 1 AND [OpremaID] IS NULL) OR ([OpremaID] = @Original_OpremaID)));
-SELECT PecarosID, RbrUlova, Datum, Vreme, VrstaID, Tezina, JezeroID, RbrLokacije, OpremaID FROM Ulov WHERE (PecarosID = @PecarosID) AND (RbrUlova = @RbrUlova)";
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[Ulov] SET [PecarosID] = @PecarosID, [Datum] = @Datum, [Vreme] = @Vreme, [VrstaID] = @VrstaID, [Tezina] = @Tezina, [JezeroID] = @JezeroID, [RbrLokacije] = @RbrLokacije WHERE (([PecarosID] = @Original_PecarosID) AND ([RbrUlova] = @Original_RbrUlova) AND ([Datum] = @Original_Datum) AND ([Vreme] = @Original_Vreme) AND ([VrstaID] = @Original_VrstaID) AND ([Tezina] = @Original_Tezina) AND ([JezeroID] = @Original_JezeroID) AND ([RbrLokacije] = @Original_RbrLokacije));
+SELECT PecarosID, RbrUlova, Datum, Vreme, VrstaID, Tezina, JezeroID, RbrLokacije FROM Ulov WHERE (PecarosID = @PecarosID) AND (RbrUlova = @RbrUlova)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PecarosID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PecarosID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Datum", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Datum", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -5825,7 +5994,6 @@ SELECT PecarosID, RbrUlova, Datum, Vreme, VrstaID, Tezina, JezeroID, RbrLokacije
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Tezina", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Tezina", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@JezeroID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "JezeroID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@RbrLokacije", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RbrLokacije", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@OpremaID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "OpremaID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PecarosID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PecarosID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_RbrUlova", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RbrUlova", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Datum", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Datum", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
@@ -5834,8 +6002,6 @@ SELECT PecarosID, RbrUlova, Datum, Vreme, VrstaID, Tezina, JezeroID, RbrLokacije
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Tezina", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Tezina", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_JezeroID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "JezeroID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_RbrLokacije", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RbrLokacije", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_OpremaID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "OpremaID", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_OpremaID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "OpremaID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@RbrUlova", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "RbrUlova", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
@@ -5852,8 +6018,8 @@ SELECT PecarosID, RbrUlova, Datum, Vreme, VrstaID, Tezina, JezeroID, RbrLokacije
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT PecarosID, RbrUlova, Datum, Vreme, VrstaID, Tezina, JezeroID, RbrLokacije," +
-                " OpremaID FROM dbo.Ulov";
+            this._commandCollection[0].CommandText = "SELECT PecarosID, RbrUlova, Datum, Vreme, VrstaID, Tezina, JezeroID, RbrLokacije " +
+                "FROM dbo.Ulov";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -5914,7 +6080,7 @@ SELECT PecarosID, RbrUlova, Datum, Vreme, VrstaID, Tezina, JezeroID, RbrLokacije
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_PecarosID, int Original_RbrUlova, System.DateTime Original_Datum, System.TimeSpan Original_Vreme, int Original_VrstaID, double Original_Tezina, int Original_JezeroID, int Original_RbrLokacije, global::System.Nullable<int> Original_OpremaID) {
+        public virtual int Delete(int Original_PecarosID, int Original_RbrUlova, System.DateTime Original_Datum, System.TimeSpan Original_Vreme, int Original_VrstaID, double Original_Tezina, int Original_JezeroID, int Original_RbrLokacije) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_PecarosID));
             this.Adapter.DeleteCommand.Parameters[1].Value = ((int)(Original_RbrUlova));
             this.Adapter.DeleteCommand.Parameters[2].Value = ((System.DateTime)(Original_Datum));
@@ -5923,14 +6089,6 @@ SELECT PecarosID, RbrUlova, Datum, Vreme, VrstaID, Tezina, JezeroID, RbrLokacije
             this.Adapter.DeleteCommand.Parameters[5].Value = ((double)(Original_Tezina));
             this.Adapter.DeleteCommand.Parameters[6].Value = ((int)(Original_JezeroID));
             this.Adapter.DeleteCommand.Parameters[7].Value = ((int)(Original_RbrLokacije));
-            if ((Original_OpremaID.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[8].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[9].Value = ((int)(Original_OpremaID.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[8].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[9].Value = global::System.DBNull.Value;
-            }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -5951,7 +6109,7 @@ SELECT PecarosID, RbrUlova, Datum, Vreme, VrstaID, Tezina, JezeroID, RbrLokacije
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(int PecarosID, System.DateTime Datum, System.TimeSpan Vreme, int VrstaID, double Tezina, int JezeroID, int RbrLokacije, global::System.Nullable<int> OpremaID) {
+        public virtual int Insert(int PecarosID, System.DateTime Datum, System.TimeSpan Vreme, int VrstaID, double Tezina, int JezeroID, int RbrLokacije) {
             this.Adapter.InsertCommand.Parameters[0].Value = ((int)(PecarosID));
             this.Adapter.InsertCommand.Parameters[1].Value = ((System.DateTime)(Datum));
             this.Adapter.InsertCommand.Parameters[2].Value = ((System.TimeSpan)(Vreme));
@@ -5959,12 +6117,6 @@ SELECT PecarosID, RbrUlova, Datum, Vreme, VrstaID, Tezina, JezeroID, RbrLokacije
             this.Adapter.InsertCommand.Parameters[4].Value = ((double)(Tezina));
             this.Adapter.InsertCommand.Parameters[5].Value = ((int)(JezeroID));
             this.Adapter.InsertCommand.Parameters[6].Value = ((int)(RbrLokacije));
-            if ((OpremaID.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[7].Value = ((int)(OpremaID.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[7].Value = global::System.DBNull.Value;
-            }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -5993,7 +6145,6 @@ SELECT PecarosID, RbrUlova, Datum, Vreme, VrstaID, Tezina, JezeroID, RbrLokacije
                     double Tezina, 
                     int JezeroID, 
                     int RbrLokacije, 
-                    global::System.Nullable<int> OpremaID, 
                     int Original_PecarosID, 
                     int Original_RbrUlova, 
                     System.DateTime Original_Datum, 
@@ -6002,7 +6153,6 @@ SELECT PecarosID, RbrUlova, Datum, Vreme, VrstaID, Tezina, JezeroID, RbrLokacije
                     double Original_Tezina, 
                     int Original_JezeroID, 
                     int Original_RbrLokacije, 
-                    global::System.Nullable<int> Original_OpremaID, 
                     int RbrUlova) {
             this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(PecarosID));
             this.Adapter.UpdateCommand.Parameters[1].Value = ((System.DateTime)(Datum));
@@ -6011,29 +6161,15 @@ SELECT PecarosID, RbrUlova, Datum, Vreme, VrstaID, Tezina, JezeroID, RbrLokacije
             this.Adapter.UpdateCommand.Parameters[4].Value = ((double)(Tezina));
             this.Adapter.UpdateCommand.Parameters[5].Value = ((int)(JezeroID));
             this.Adapter.UpdateCommand.Parameters[6].Value = ((int)(RbrLokacije));
-            if ((OpremaID.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[7].Value = ((int)(OpremaID.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[7].Value = global::System.DBNull.Value;
-            }
-            this.Adapter.UpdateCommand.Parameters[8].Value = ((int)(Original_PecarosID));
-            this.Adapter.UpdateCommand.Parameters[9].Value = ((int)(Original_RbrUlova));
-            this.Adapter.UpdateCommand.Parameters[10].Value = ((System.DateTime)(Original_Datum));
-            this.Adapter.UpdateCommand.Parameters[11].Value = ((System.TimeSpan)(Original_Vreme));
-            this.Adapter.UpdateCommand.Parameters[12].Value = ((int)(Original_VrstaID));
-            this.Adapter.UpdateCommand.Parameters[13].Value = ((double)(Original_Tezina));
-            this.Adapter.UpdateCommand.Parameters[14].Value = ((int)(Original_JezeroID));
-            this.Adapter.UpdateCommand.Parameters[15].Value = ((int)(Original_RbrLokacije));
-            if ((Original_OpremaID.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[16].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[17].Value = ((int)(Original_OpremaID.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[16].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[17].Value = global::System.DBNull.Value;
-            }
-            this.Adapter.UpdateCommand.Parameters[18].Value = ((int)(RbrUlova));
+            this.Adapter.UpdateCommand.Parameters[7].Value = ((int)(Original_PecarosID));
+            this.Adapter.UpdateCommand.Parameters[8].Value = ((int)(Original_RbrUlova));
+            this.Adapter.UpdateCommand.Parameters[9].Value = ((System.DateTime)(Original_Datum));
+            this.Adapter.UpdateCommand.Parameters[10].Value = ((System.TimeSpan)(Original_Vreme));
+            this.Adapter.UpdateCommand.Parameters[11].Value = ((int)(Original_VrstaID));
+            this.Adapter.UpdateCommand.Parameters[12].Value = ((double)(Original_Tezina));
+            this.Adapter.UpdateCommand.Parameters[13].Value = ((int)(Original_JezeroID));
+            this.Adapter.UpdateCommand.Parameters[14].Value = ((int)(Original_RbrLokacije));
+            this.Adapter.UpdateCommand.Parameters[15].Value = ((int)(RbrUlova));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -6054,24 +6190,318 @@ SELECT PecarosID, RbrUlova, Datum, Vreme, VrstaID, Tezina, JezeroID, RbrLokacije
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(
-                    System.DateTime Datum, 
-                    System.TimeSpan Vreme, 
-                    int VrstaID, 
-                    double Tezina, 
-                    int JezeroID, 
-                    int RbrLokacije, 
-                    global::System.Nullable<int> OpremaID, 
-                    int Original_PecarosID, 
-                    int Original_RbrUlova, 
-                    System.DateTime Original_Datum, 
-                    System.TimeSpan Original_Vreme, 
-                    int Original_VrstaID, 
-                    double Original_Tezina, 
-                    int Original_JezeroID, 
-                    int Original_RbrLokacije, 
-                    global::System.Nullable<int> Original_OpremaID) {
-            return this.Update(Original_PecarosID, Datum, Vreme, VrstaID, Tezina, JezeroID, RbrLokacije, OpremaID, Original_PecarosID, Original_RbrUlova, Original_Datum, Original_Vreme, Original_VrstaID, Original_Tezina, Original_JezeroID, Original_RbrLokacije, Original_OpremaID, Original_RbrUlova);
+        public virtual int Update(System.DateTime Datum, System.TimeSpan Vreme, int VrstaID, double Tezina, int JezeroID, int RbrLokacije, int Original_PecarosID, int Original_RbrUlova, System.DateTime Original_Datum, System.TimeSpan Original_Vreme, int Original_VrstaID, double Original_Tezina, int Original_JezeroID, int Original_RbrLokacije) {
+            return this.Update(Original_PecarosID, Datum, Vreme, VrstaID, Tezina, JezeroID, RbrLokacije, Original_PecarosID, Original_RbrUlova, Original_Datum, Original_Vreme, Original_VrstaID, Original_Tezina, Original_JezeroID, Original_RbrLokacije, Original_RbrUlova);
+        }
+    }
+    
+    /// <summary>
+    ///Represents the connection and commands used to retrieve and save data.
+    ///</summary>
+    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
+    [global::System.ComponentModel.ToolboxItem(true)]
+    [global::System.ComponentModel.DataObjectAttribute(true)]
+    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
+        ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+    public partial class UlovOpremaTableAdapter : global::System.ComponentModel.Component {
+        
+        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
+        
+        private global::System.Data.SqlClient.SqlConnection _connection;
+        
+        private global::System.Data.SqlClient.SqlTransaction _transaction;
+        
+        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
+        
+        private bool _clearBeforeFill;
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        public UlovOpremaTableAdapter() {
+            this.ClearBeforeFill = true;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
+            get {
+                if ((this._adapter == null)) {
+                    this.InitAdapter();
+                }
+                return this._adapter;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        internal global::System.Data.SqlClient.SqlConnection Connection {
+            get {
+                if ((this._connection == null)) {
+                    this.InitConnection();
+                }
+                return this._connection;
+            }
+            set {
+                this._connection = value;
+                if ((this.Adapter.InsertCommand != null)) {
+                    this.Adapter.InsertCommand.Connection = value;
+                }
+                if ((this.Adapter.DeleteCommand != null)) {
+                    this.Adapter.DeleteCommand.Connection = value;
+                }
+                if ((this.Adapter.UpdateCommand != null)) {
+                    this.Adapter.UpdateCommand.Connection = value;
+                }
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    if ((this.CommandCollection[i] != null)) {
+                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
+                    }
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        internal global::System.Data.SqlClient.SqlTransaction Transaction {
+            get {
+                return this._transaction;
+            }
+            set {
+                this._transaction = value;
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    this.CommandCollection[i].Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.DeleteCommand != null))) {
+                    this.Adapter.DeleteCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.InsertCommand != null))) {
+                    this.Adapter.InsertCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.UpdateCommand != null))) {
+                    this.Adapter.UpdateCommand.Transaction = this._transaction;
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
+            get {
+                if ((this._commandCollection == null)) {
+                    this.InitCommandCollection();
+                }
+                return this._commandCollection;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        public bool ClearBeforeFill {
+            get {
+                return this._clearBeforeFill;
+            }
+            set {
+                this._clearBeforeFill = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        private void InitAdapter() {
+            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
+            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
+            tableMapping.SourceTable = "Table";
+            tableMapping.DataSetTable = "UlovOprema";
+            tableMapping.ColumnMappings.Add("PecarosId", "PecarosId");
+            tableMapping.ColumnMappings.Add("RbrUlova", "RbrUlova");
+            tableMapping.ColumnMappings.Add("OpremaID", "OpremaID");
+            this._adapter.TableMappings.Add(tableMapping);
+            this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.DeleteCommand.Connection = this.Connection;
+            this._adapter.DeleteCommand.CommandText = "DELETE FROM [dbo].[UlovOprema] WHERE (([PecarosId] = @Original_PecarosId) AND ([R" +
+                "brUlova] = @Original_RbrUlova) AND ([OpremaID] = @Original_OpremaID))";
+            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PecarosId", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PecarosId", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_RbrUlova", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RbrUlova", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_OpremaID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "OpremaID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.InsertCommand.Connection = this.Connection;
+            this._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[UlovOprema] ([PecarosId], [RbrUlova], [OpremaID]) VALUES (@Pec" +
+                "arosId, @RbrUlova, @OpremaID);\r\nSELECT PecarosId, RbrUlova, OpremaID FROM UlovOp" +
+                "rema WHERE (OpremaID = @OpremaID) AND (PecarosId = @PecarosId) AND (RbrUlova = @" +
+                "RbrUlova)";
+            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PecarosId", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PecarosId", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@RbrUlova", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RbrUlova", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@OpremaID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "OpremaID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.UpdateCommand.Connection = this.Connection;
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[UlovOprema] SET [PecarosId] = @PecarosId, [RbrUlova] = @RbrUlova, [OpremaID] = @OpremaID WHERE (([PecarosId] = @Original_PecarosId) AND ([RbrUlova] = @Original_RbrUlova) AND ([OpremaID] = @Original_OpremaID));
+SELECT PecarosId, RbrUlova, OpremaID FROM UlovOprema WHERE (OpremaID = @OpremaID) AND (PecarosId = @PecarosId) AND (RbrUlova = @RbrUlova)";
+            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PecarosId", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PecarosId", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@RbrUlova", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RbrUlova", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@OpremaID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "OpremaID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PecarosId", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PecarosId", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_RbrUlova", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RbrUlova", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_OpremaID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "OpremaID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        private void InitConnection() {
+            this._connection = new global::System.Data.SqlClient.SqlConnection();
+            this._connection.ConnectionString = global::A10Blok.Properties.Settings.Default.A10ConnectionString;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        private void InitCommandCollection() {
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[0].Connection = this.Connection;
+            this._commandCollection[0].CommandText = "SELECT PecarosId, RbrUlova, OpremaID FROM dbo.UlovOprema";
+            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
+        public virtual int Fill(ERDijagram.UlovOpremaDataTable dataTable) {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
+        public virtual ERDijagram.UlovOpremaDataTable GetData() {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            ERDijagram.UlovOpremaDataTable dataTable = new ERDijagram.UlovOpremaDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(ERDijagram.UlovOpremaDataTable dataTable) {
+            return this.Adapter.Update(dataTable);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(ERDijagram dataSet) {
+            return this.Adapter.Update(dataSet, "UlovOprema");
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow dataRow) {
+            return this.Adapter.Update(new global::System.Data.DataRow[] {
+                        dataRow});
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow[] dataRows) {
+            return this.Adapter.Update(dataRows);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
+        public virtual int Delete(int Original_PecarosId, int Original_RbrUlova, int Original_OpremaID) {
+            this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_PecarosId));
+            this.Adapter.DeleteCommand.Parameters[1].Value = ((int)(Original_RbrUlova));
+            this.Adapter.DeleteCommand.Parameters[2].Value = ((int)(Original_OpremaID));
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
+            if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.DeleteCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.DeleteCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.DeleteCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
+        public virtual int Insert(int PecarosId, int RbrUlova, int OpremaID) {
+            this.Adapter.InsertCommand.Parameters[0].Value = ((int)(PecarosId));
+            this.Adapter.InsertCommand.Parameters[1].Value = ((int)(RbrUlova));
+            this.Adapter.InsertCommand.Parameters[2].Value = ((int)(OpremaID));
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
+            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.InsertCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.InsertCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(int PecarosId, int RbrUlova, int OpremaID, int Original_PecarosId, int Original_RbrUlova, int Original_OpremaID) {
+            this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(PecarosId));
+            this.Adapter.UpdateCommand.Parameters[1].Value = ((int)(RbrUlova));
+            this.Adapter.UpdateCommand.Parameters[2].Value = ((int)(OpremaID));
+            this.Adapter.UpdateCommand.Parameters[3].Value = ((int)(Original_PecarosId));
+            this.Adapter.UpdateCommand.Parameters[4].Value = ((int)(Original_RbrUlova));
+            this.Adapter.UpdateCommand.Parameters[5].Value = ((int)(Original_OpremaID));
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
+            if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.UpdateCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.UpdateCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.UpdateCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(int Original_PecarosId, int Original_RbrUlova, int Original_OpremaID) {
+            return this.Update(Original_PecarosId, Original_RbrUlova, Original_OpremaID, Original_PecarosId, Original_RbrUlova, Original_OpremaID);
         }
     }
     
@@ -6452,6 +6882,8 @@ SELECT VrstaID, Naziv, Opis FROM Vrsta_Ribe WHERE (VrstaID = @VrstaID)";
         
         private UlovTableAdapter _ulovTableAdapter;
         
+        private UlovOpremaTableAdapter _ulovOpremaTableAdapter;
+        
         private Vrsta_RibeTableAdapter _vrsta_RibeTableAdapter;
         
         private bool _backupDataSetBeforeUpdate;
@@ -6558,6 +6990,20 @@ SELECT VrstaID, Naziv, Opis FROM Vrsta_Ribe WHERE (VrstaID = @VrstaID)";
         [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
             "ft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3" +
             "a", "System.Drawing.Design.UITypeEditor")]
+        public UlovOpremaTableAdapter UlovOpremaTableAdapter {
+            get {
+                return this._ulovOpremaTableAdapter;
+            }
+            set {
+                this._ulovOpremaTableAdapter = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
+            "ft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3" +
+            "a", "System.Drawing.Design.UITypeEditor")]
         public Vrsta_RibeTableAdapter Vrsta_RibeTableAdapter {
             get {
                 return this._vrsta_RibeTableAdapter;
@@ -6610,6 +7056,10 @@ SELECT VrstaID, Naziv, Opis FROM Vrsta_Ribe WHERE (VrstaID = @VrstaID)";
                             && (this._ulovTableAdapter.Connection != null))) {
                     return this._ulovTableAdapter.Connection;
                 }
+                if (((this._ulovOpremaTableAdapter != null) 
+                            && (this._ulovOpremaTableAdapter.Connection != null))) {
+                    return this._ulovOpremaTableAdapter.Connection;
+                }
                 if (((this._vrsta_RibeTableAdapter != null) 
                             && (this._vrsta_RibeTableAdapter.Connection != null))) {
                     return this._vrsta_RibeTableAdapter.Connection;
@@ -6645,6 +7095,9 @@ SELECT VrstaID, Naziv, Opis FROM Vrsta_Ribe WHERE (VrstaID = @VrstaID)";
                 if ((this._ulovTableAdapter != null)) {
                     count = (count + 1);
                 }
+                if ((this._ulovOpremaTableAdapter != null)) {
+                    count = (count + 1);
+                }
                 if ((this._vrsta_RibeTableAdapter != null)) {
                     count = (count + 1);
                 }
@@ -6677,15 +7130,6 @@ SELECT VrstaID, Naziv, Opis FROM Vrsta_Ribe WHERE (VrstaID = @VrstaID)";
                     allChangedRows.AddRange(updatedRows);
                 }
             }
-            if ((this._opremaTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.Oprema.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._opremaTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
             if ((this._pecarosTableAdapter != null)) {
                 global::System.Data.DataRow[] updatedRows = dataSet.Pecaros.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
@@ -6704,12 +7148,12 @@ SELECT VrstaID, Naziv, Opis FROM Vrsta_Ribe WHERE (VrstaID = @VrstaID)";
                     allChangedRows.AddRange(updatedRows);
                 }
             }
-            if ((this._lokacijaTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.Lokacija.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+            if ((this._opremaTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.Oprema.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
-                    result = (result + this._lokacijaTableAdapter.Update(updatedRows));
+                    result = (result + this._opremaTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -6719,6 +7163,24 @@ SELECT VrstaID, Naziv, Opis FROM Vrsta_Ribe WHERE (VrstaID = @VrstaID)";
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
                     result = (result + this._ulovTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
+            if ((this._lokacijaTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.Lokacija.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._lokacijaTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
+            if ((this._ulovOpremaTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.UlovOprema.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._ulovOpremaTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -6748,14 +7210,6 @@ SELECT VrstaID, Naziv, Opis FROM Vrsta_Ribe WHERE (VrstaID = @VrstaID)";
                     allAddedRows.AddRange(addedRows);
                 }
             }
-            if ((this._opremaTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.Oprema.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._opremaTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
             if ((this._pecarosTableAdapter != null)) {
                 global::System.Data.DataRow[] addedRows = dataSet.Pecaros.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
@@ -6772,11 +7226,11 @@ SELECT VrstaID, Naziv, Opis FROM Vrsta_Ribe WHERE (VrstaID = @VrstaID)";
                     allAddedRows.AddRange(addedRows);
                 }
             }
-            if ((this._lokacijaTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.Lokacija.Select(null, null, global::System.Data.DataViewRowState.Added);
+            if ((this._opremaTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.Oprema.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
-                    result = (result + this._lokacijaTableAdapter.Update(addedRows));
+                    result = (result + this._opremaTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -6785,6 +7239,22 @@ SELECT VrstaID, Naziv, Opis FROM Vrsta_Ribe WHERE (VrstaID = @VrstaID)";
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
                     result = (result + this._ulovTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
+            if ((this._lokacijaTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.Lokacija.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._lokacijaTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
+            if ((this._ulovOpremaTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.UlovOprema.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._ulovOpremaTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -6798,11 +7268,11 @@ SELECT VrstaID, Naziv, Opis FROM Vrsta_Ribe WHERE (VrstaID = @VrstaID)";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private int UpdateDeletedRows(ERDijagram dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows) {
             int result = 0;
-            if ((this._ulovTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.Ulov.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+            if ((this._ulovOpremaTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.UlovOprema.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
-                    result = (result + this._ulovTableAdapter.Update(deletedRows));
+                    result = (result + this._ulovOpremaTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -6811,6 +7281,22 @@ SELECT VrstaID, Naziv, Opis FROM Vrsta_Ribe WHERE (VrstaID = @VrstaID)";
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
                     result = (result + this._lokacijaTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
+            if ((this._ulovTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.Ulov.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._ulovTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
+            if ((this._opremaTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.Oprema.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._opremaTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -6827,14 +7313,6 @@ SELECT VrstaID, Naziv, Opis FROM Vrsta_Ribe WHERE (VrstaID = @VrstaID)";
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
                     result = (result + this._pecarosTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
-            if ((this._opremaTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.Oprema.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._opremaTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -6920,6 +7398,11 @@ SELECT VrstaID, Naziv, Opis FROM Vrsta_Ribe WHERE (VrstaID = @VrstaID)";
             }
             if (((this._ulovTableAdapter != null) 
                         && (this.MatchTableAdapterConnection(this._ulovTableAdapter.Connection) == false))) {
+                throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
+                        "tring.");
+            }
+            if (((this._ulovOpremaTableAdapter != null) 
+                        && (this.MatchTableAdapterConnection(this._ulovOpremaTableAdapter.Connection) == false))) {
                 throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
                         "tring.");
             }
@@ -7014,6 +7497,15 @@ SELECT VrstaID, Naziv, Opis FROM Vrsta_Ribe WHERE (VrstaID = @VrstaID)";
                         adaptersWithAcceptChangesDuringUpdate.Add(this._ulovTableAdapter.Adapter);
                     }
                 }
+                if ((this._ulovOpremaTableAdapter != null)) {
+                    revertConnections.Add(this._ulovOpremaTableAdapter, this._ulovOpremaTableAdapter.Connection);
+                    this._ulovOpremaTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
+                    this._ulovOpremaTableAdapter.Transaction = ((global::System.Data.SqlClient.SqlTransaction)(workTransaction));
+                    if (this._ulovOpremaTableAdapter.Adapter.AcceptChangesDuringUpdate) {
+                        this._ulovOpremaTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
+                        adaptersWithAcceptChangesDuringUpdate.Add(this._ulovOpremaTableAdapter.Adapter);
+                    }
+                }
                 if ((this._vrsta_RibeTableAdapter != null)) {
                     revertConnections.Add(this._vrsta_RibeTableAdapter, this._vrsta_RibeTableAdapter.Connection);
                     this._vrsta_RibeTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
@@ -7104,6 +7596,10 @@ SELECT VrstaID, Naziv, Opis FROM Vrsta_Ribe WHERE (VrstaID = @VrstaID)";
                 if ((this._ulovTableAdapter != null)) {
                     this._ulovTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._ulovTableAdapter]));
                     this._ulovTableAdapter.Transaction = null;
+                }
+                if ((this._ulovOpremaTableAdapter != null)) {
+                    this._ulovOpremaTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._ulovOpremaTableAdapter]));
+                    this._ulovOpremaTableAdapter.Transaction = null;
                 }
                 if ((this._vrsta_RibeTableAdapter != null)) {
                     this._vrsta_RibeTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._vrsta_RibeTableAdapter]));

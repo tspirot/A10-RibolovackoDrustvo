@@ -110,9 +110,9 @@
       <DependentUpon>ERDijagram.xsd</DependentUpon>
     </None>
     <None Include="ERDijagram.xsd">
-      <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>ERDijagram.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </None>
     <None Include="ERDijagram.xss">
       <DependentUpon>ERDijagram.xsd</DependentUpon>
@@ -138,6 +138,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <DependentUpon>A10.mdf</DependentUpon>
     </Content>
+    <Content Include="prosirenje.sql" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
